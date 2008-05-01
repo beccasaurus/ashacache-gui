@@ -1,0 +1,20 @@
+Ashacache
+=========
+
+This is a client library to [Ashacache.com][AC], a Ruby on Rails website
+website that my buddy [Lance][LKW] is making for a school project
+
+This gem is made up of two parts:
+ * [ActiveResource][AR]-based Client Library
+ * [Shoes][SHOES]-based Graphical User Interface
+
+See also: [Ashacache Wiki][WIKI]
+
+
+
+
+[AC]: http://www.ashacache.com
+[LKW]: http://lancewig.com/
+[AR]: http://api.rubyonrails.com/files/vendor/rails/activeresource/README.html
+[SHOES]: http://code.whytheluckystiff.net/shoes/ 
+[WIKI]: http://lancewig.com/scavenger/tiki-index.php
