@@ -4,13 +4,31 @@ Ashacache
 This is a client library to [Ashacache.com][AC], a Ruby on Rails website
 website that my buddy [Lance][LKW] is making for a school project
 
-This gem is made up of two parts:
+This gem is made up of three parts:
  * [ActiveResource][AR]-based Client Library
  * [Shoes][SHOES]-based Graphical User Interface
+ * Command-line Interface
 
 See also: [Ashacache Wiki][WIKI]
 
 
+Installation
+------------
+
+    $ sudo gem sources -a http://gems.github.com
+    $ sudo gem install remi-ashacache
+
+
+Usage
+-----
+
+The command-line interface
+
+    $ ashacache
+
+The graphical interface
+
+    $ ashacache-gui
 
 
 [AC]: http://www.ashacache.com
