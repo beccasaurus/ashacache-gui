@@ -1,0 +1,4 @@
+#! /usr/bin/env ruby
+require File.dirname(__FILE__) + '/../lib/ashacache'
+require 'ashacache/bin'
+Ashacache::Bin.new( ARGV ).run
