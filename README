@@ -41,3 +41,12 @@ The graphical interface
 [AR]: http://api.rubyonrails.com/files/vendor/rails/activeresource/README.html
 [SHOES]: http://code.whytheluckystiff.net/shoes/ 
 [WIKI]: http://lancewig.com/scavenger/tiki-index.php
+
+
+### Notes
+
+To get [active_resource][AR] working with [Shoes][SHOES], I had to edit my local Shoes rubygems.  I had to remove two lines (one in active_support, andother in [active_resource][AR]) that said:
+
+    require 'cgi'
+
+I'll try to fix this by adding cgi to the path ($:) manually
