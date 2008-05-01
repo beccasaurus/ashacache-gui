@@ -18,6 +18,11 @@ Installation
     $ sudo gem sources -a http://gems.github.com
     $ sudo gem install remi-ashacache
 
+To set your Ashacache.com username and password, edit ~/.ashacacherc
+
+    USER = 'John Smith'
+    PASS = 'mypassword'
+
 
 Usage
 -----

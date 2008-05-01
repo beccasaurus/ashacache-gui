@@ -1,19 +1,12 @@
 $:.unshift File.dirname(__FILE__)
 %w( rubygems activeresource yaml ).each { |lib| require lib }
 
-# load username and password from ~/.ashacacherc
-#
-# should change this so ~/.ashacacherc is eval'd _after_ requiring
-# all of our classes, to they can be easily overriden
-rc = File.expand_path('~/.ashacacherc')
-unless File.file? rc
-  raise "\nUser Ashacache Config File Not Found: #{rc} \nPlease add with: \nUSER='username'\nPASS='password'"  
-else
-  eval File.read(rc)
-end
-
 SITE = "http://ashacache.com"
-ActiveResource::Base.site = "http://#{USER}:#{PASS}@ashacache.com"
+rc = File.expand_path('~/.ashacacherc')
+eval File.read(rc) if File.file? rc
+
+def auth () (defined?USER and defined?PASS) ? [USER,PASS] : nil end
+ActiveResource::Base.site = "http://#{ auth.join ':' }@ashacache.com"
 
 module Ashacache
 
@@ -24,7 +17,7 @@ module Ashacache
   def html path
     require 'open-uri'
     domain = (path['http://']) ? nil : SITE
-    open "#{domain}#{path}", :http_basic_authentication => [USER, PASS]
+    open "#{domain}#{path}", :http_basic_authentication => auth
   end
 
   class Member < ActiveResource::Base
