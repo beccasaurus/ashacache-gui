@@ -3,6 +3,7 @@
 # Shoes-based desktop GUI for ashacache.com
 #   ( shoes: http://code.whytheluckystiff.net/shoes/ )
 #
+$:.unshift '/usr/lib/ruby/1.8'
 Shoes.setup do
   gem 'hpricot'
   gem 'activesupport'
@@ -11,7 +12,6 @@ end
 
 require 'open-uri'
 require 'rubygems'
-require '/usr/lib/ruby/1.8/cgi'
 require 'hpricot'
 require 'active_support'
 require 'active_resource'
