@@ -1,13 +1,18 @@
 $:.unshift File.dirname(__FILE__)
-
 %w( rubygems activeresource yaml ).each { |lib| require lib }
 
-http_basic_authentication_yml = File.join File.dirname(__FILE__), 'config', 'http_basic_authentication.yml'
-http_basic_authentication = YAML::load File.read(http_basic_authentication_yml)
+# load username and password from ~/.ashacacherc
+#
+# should change this so ~/.ashacacherc is eval'd _after_ requiring
+# all of our classes, to they can be easily overriden
+rc = File.expand_path('~/.ashacacherc')
+unless File.file? rc
+  raise "\nUser Ashacache Config File Not Found: #{rc} \nPlease add with: \nUSER='username'\nPASS='password'"  
+else
+  eval File.read(rc)
+end
 
 SITE = "http://ashacache.com"
-USER = http_basic_authentication[:username]
-PASS = http_basic_authentication[:password]
 ActiveResource::Base.site = "http://#{USER}:#{PASS}@ashacache.com"
 
 module Ashacache
