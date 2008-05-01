@@ -1,0 +1,77 @@
+#! /usr/bin/env shoes
+#
+# Shoes-based desktop GUI for ashacache.com
+#   ( shoes: http://code.whytheluckystiff.net/shoes/ )
+#
+Shoes.setup do
+  gem 'hpricot'
+  gem 'activesupport'
+  gem 'activeresource'
+end
+
+require 'open-uri'
+require 'rubygems'
+require '/usr/lib/ruby/1.8/cgi'
+require 'hpricot'
+require 'active_support'
+require 'active_resource'
+
+require File.dirname(__FILE__) + '/../lib/ashacache'
+
+BROWN       = '#4C1B1B'
+LIGHT_BROWN = '#BD8D46'
+RED         = '#B9121B'
+WHITE       = '#FCFAE1'
+
+class Ashacache::GUI < Shoes
+  include Ashacache
+
+  url '/', :index
+  url '/hunts/(\w+)', :show_hunt
+
+  def hunt id
+    hunts.find { |h| h.id == id.to_i }
+  end
+  def hunts
+    @hunts ||= Hunt.find :all
+  end
+
+  def _header
+    stack do
+      background BROWN
+      caption link('Ashacache.com', :click => '/', :stroke => WHITE), :align => 'center'
+    end
+  end
+
+  def index
+    _header
+    stack do
+      background LIGHT_BROWN
+      para strong('Current Hunts', :stroke => RED)
+    end
+    stack do
+      hunts.each do |hunt|
+         para link(hunt.name, :click => "/hunts/#{hunt.id}")
+      end
+    end
+  end
+
+  def show_hunt id
+    _header
+    hunt = hunt id
+    stack do
+      background LIGHT_BROWN
+      para strong(hunt.name, :stroke => RED)
+    end
+    stack do
+      para hunt.description
+    end
+    stack do
+      image hunt.local_image
+    end
+  end
+end
+
+Ashacache::GUI.app
+
+# vim:set ft=ruby:

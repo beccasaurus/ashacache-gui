@@ -1,3 +1,4 @@
 tmp/*
+bin/tmp/*
 *.swp
 config/http_basic_authentication.yml
