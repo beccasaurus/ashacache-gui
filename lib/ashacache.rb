@@ -1,8 +1,13 @@
 $:.unshift File.dirname(__FILE__)
 
-%w( rubygems activeresource ).each { |lib| require lib }
+%w( rubygems activeresource yaml ).each { |lib| require lib }
 
-SITE, USER, PASS = "http://ashacache.com", "John Smith", "*******"
+http_basic_authentication_yml = File.join File.dirname(__FILE__), 'config', 'http_basic_authentication.yml'
+http_basic_authentication = YAML::load File.read(http_basic_authentication_yml)
+
+SITE = "http://ashacache.com"
+USER = http_basic_authentication[:username]
+PASS = http_basic_authentication[:password]
 ActiveResource::Base.site = "http://#{USER}:#{PASS}@ashacache.com"
 
 module Ashacache
